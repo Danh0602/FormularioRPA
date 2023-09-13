@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="designer.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+    <title>Formulário | GN</title>
+
+    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jonthornton/jquery-timepicker/jquery.timepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jonthornton/jquery-timepicker/jquery.timepicker.min.css">
+
+    <script>
+        $(document).ready(function() {
+            $('#hora').timepicker({
+                timeFormat: 'HH:mm', // Formato de 24 horas
+                interval: 30,
+                minTime: '00:00',
+                maxTime: '23:59',
+                startTime: '00:00',
+                dynamic: false,
+                dropdown: true,
+                scrollbar: true
+            });
+        });
+    </script>-->
+
+    <script>
+        function formatarDataInput() {
+            const dataInput = document.getElementById("data_execução");
+            const dataValue = dataInput.value;
+            const dataParts = dataValue.split("/");
+            
+            // Verificar se a data está no formato completo yyyy-MM-dd
+            if (dataParts.length === 3 && dataParts[0].length === 4 && dataParts[1].length === 2 && dataParts[2].length === 2) {
+                const dia = dataParts[2];
+                const mes = dataParts[1];
+                const ano = dataParts[0];
+                const dataFormatada = `${dia}/${mes}/${ano}`;
+                dataInput.value = dataFormatada;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="box">
+        <form action="">
+            <fieldset>
+                <legend><strong>Fórmulário de RPA</strong></legend>
+                <br>
+                <div class="inputBox">
+                    <input type="text" name="nome" id="nome" class="inputUser" required>
+                    <label for="nome" class="labelInput"><strong>Nome completo</strong></label>
+                </div>
+                <br><br>
+                <div class="inputBox">
+                    <input type="text" name="email" id="email" class="inputUser" required>
+                    <label for="email" class="labelInput"><strong>Email</strong></label>
+                    <span class="input-group-text" id="basic-addon2">@example.com</span>
+                </div>
+                <br><br>
+                <div class="inputBox">
+                    <input type="tel" name="telefone" id="telefone" class="inputUser" required>
+                    <label for="Area" class="labelInput"><strong>Área</strong></label>
+                </div>
+                <br><br>
+                <div class="inputBox">
+                    <br><br>
+                    <label for="Area" class="labelInput"><strong>Lojas</strong></label>
+                    <select name="Countries" id="Countries" multiple>
+                        <option value="1">ABA</option>
+                        <option value="2">ABC</option>
+                        <option value="3">DEL</option>
+                        <option value="4">XSO</option>
+                        <option value="5">OBS</option>
+                    </select>
+                </div> 
+                <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+                <script>
+                    new MultiSelectTag('Countries')  // id
+                </script>
+
+                <p><strong>Escolha seu robô:</strong></p>
+                <input type="radio" id="Robot1" name="genero" value="Robot1" required>
+                <label for="Robo 1"><strong>Robô 1</strong></label>
+                <br>
+                <input type="radio" id="Robot2" name="genero" value="Robot2" required>
+                <label for="Robo 2"><strong>Robô 2</strong></label>
+                <br>
+                <input type="radio" id="Robot3" name="genero" value="Robot3" required>
+                <label for="Robo 3"><strong>Robô 3</strong></label>
+                <br>
+                <input type="radio" id="outro" name="genero" value="outro" required>
+                <label for="outro"><strong>Outro</strong></label>
+                <br><br>
+                <label for="data_nascimento"><strong>Data de Execução (dd/MM/yyyy):</strong></label>
+                <input type="date" name="data_execução" id="data_execução" required pattern="\d{2}-\d{2}-\d{4}" title="Digite a data no formato yyyy-MM-dd" onchange="formatarDataInput()">
+                <br><br>
+                <div class="inputBox">
+                    <label for="hora"><strong>Hora de Execução (HH:mm):</strong></label>
+                    <select name="hora" id="hora" required>
+                        <option value="">Selecione a hora</option>
+                    </select>
+                </div>
+                 <div>
+                    <script>
+                    // Obtenha a referência do elemento select
+                        const horaSelect = document.getElementById("hora");
+
+                     // Adicione a opção padrão
+                        horaSelect.innerHTML = "<option value=''>Selecione a hora</option>";
+
+                    // Adicione as opções para as horas (00-23) e minutos (00-59)
+                        for (let hour = 0; hour <= 23; hour++) {
+                            for (let minute = 0; minute <= 59; minute++) {
+                    // Formate as horas e minutos com dois dígitos
+                            const formattedHour = hour.toString().padStart(2, "0");
+                            const formattedMinute = minute.toString().padStart(2, "0");
+                                    
+                    // Crie a opção no formato HH:mm
+                            const option = document.createElement("option");
+                            option.value = `${formattedHour}:${formattedMinute}`;
+                            option.textContent = `${formattedHour}:${formattedMinute}`;
+                                    
+                    // Adicione a opção ao elemento select
+                            horaSelect.appendChild(option);
+                        }
+                    }   
+                        </script>
+                    </div>
+
+                <br><br>
+                <div class="inputBox">
+                    <label for="anexo"><strong>Selecione um arquivo:</strong></label>
+                    <input type="file" name="anexo" id="anexo" accept=".pdf,.csv,.xlsx" required>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"> <!-- 10MB em bytes -->
+                </div>
+                <br><br>
+                <!--<div class="inputBox">
+                    <input type="text" name="estado" id="estado" class="inputUser" required>
+                    <label for="estado" class="labelInput">Estado</label>
+                </div>
+                <br><br>-->
+                <!--<div class="inputBox">
+                    <input type="text" name="endereco" id="endereco" class="inputUser" required>
+                    <label for="endereco" class="labelInput">Endereço</label>
+                </div>-->
+                <br><br>
+                <input type="submit" name="submit" id="submit">
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>
