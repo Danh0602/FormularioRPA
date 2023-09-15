@@ -6,41 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="designer.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
-    <title>Formulário | GN</title>
-
-    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/jonthornton/jquery-timepicker/jquery.timepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jonthornton/jquery-timepicker/jquery.timepicker.min.css">
+    <title>Formulário RPA</title>
 
     <script>
-        $(document).ready(function() {
-            $('#hora').timepicker({
-                timeFormat: 'HH:mm', // Formato de 24 horas
-                interval: 30,
-                minTime: '00:00',
-                maxTime: '23:59',
-                startTime: '00:00',
-                dynamic: false,
-                dropdown: true,
-                scrollbar: true
-            });
-        });
-    </script>-->
-
-    <script>
-        function formatarDataInput() {
-            const dataInput = document.getElementById("data_execução");
-            const dataValue = dataInput.value;
-            const dataParts = dataValue.split("/");
-            
-            // Verificar se a data está no formato completo yyyy-MM-dd
-            if (dataParts.length === 3 && dataParts[0].length === 4 && dataParts[1].length === 2 && dataParts[2].length === 2) {
-                const dia = dataParts[2];
-                const mes = dataParts[1];
-                const ano = dataParts[0];
-                const dataFormatada = `${dia}/${mes}/${ano}`;
-                dataInput.value = dataFormatada;
-            }
+        // Função para expandir/recolher o seletor de múltiplas opções
+        function toggleSelect() {
+            const select = document.getElementById("Countries");
+            select.size = select.size === 1 ? select.options.length : 1;
         }
     </script>
 </head>
@@ -50,6 +22,9 @@
             <fieldset>
                 <legend><strong>Fórmulário de RPA</strong></legend>
                 <br>
+                <a href="https://tvivara.sharepoint.com/:f:/r/sites/TimeEficincia459/Documentos%20Compartilhados/Formul%C3%A1rio%20RPA?csf=1&web=1&e=psf0TQ" target="_blank">Para qualquer dúvida clique aqui</a>
+                <br><br>
+                <br><br>
                 <div class="inputBox">
                     <input type="text" name="nome" id="nome" class="inputUser" required>
                     <label for="nome" class="labelInput"><strong>Nome completo</strong></label>
@@ -58,24 +33,27 @@
                 <div class="inputBox">
                     <input type="text" name="email" id="email" class="inputUser" required>
                     <label for="email" class="labelInput"><strong>Email</strong></label>
-                    <span class="input-group-text" id="basic-addon2">@example.com</span>
+                    <small style="display: block; margin-top: 4px; font-size: 80%;">(Ex: @exemplo.com.br)</small>
                 </div>
                 <br><br>
                 <div class="inputBox">
                     <input type="tel" name="telefone" id="telefone" class="inputUser" required>
                     <label for="Area" class="labelInput"><strong>Área</strong></label>
+                    <small style="display: block; margin-top: 4px; font-size: 80%;">(Ex: Fiscal, Financeiro)</small>
                 </div>
                 <br><br>
                 <div class="inputBox">
                     <br><br>
                     <label for="Area" class="labelInput"><strong>Lojas</strong></label>
-                    <select name="Countries" id="Countries" multiple>
+                    <!-- Use o evento onclick para chamar a função toggleSelect() -->
+                    <select name="Countries" id="Countries" multiple onclick="toggleSelect()">
                         <option value="1">ABA</option>
                         <option value="2">ABC</option>
                         <option value="3">DEL</option>
                         <option value="4">XSO</option>
                         <option value="5">OBS</option>
                     </select>
+                    <small style="display: block; margin-top: 1px; font-size: 80%;">Lojas que serão processadas</small>
                 </div> 
                 <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
                 <script>
@@ -95,14 +73,18 @@
                 <input type="radio" id="outro" name="genero" value="outro" required>
                 <label for="outro"><strong>Outro</strong></label>
                 <br><br>
-                <label for="data_nascimento"><strong>Data de Execução (dd/MM/yyyy):</strong></label>
+                <label for="data_nascimento"><strong>Data de Execução:</strong></label>
                 <input type="date" name="data_execução" id="data_execução" required pattern="\d{2}-\d{2}-\d{4}" title="Digite a data no formato yyyy-MM-dd" onchange="formatarDataInput()">
+                <small style="display: block; margin-top: 4px; font-size: 80%;">Caso o idioma do seu computador esteja destinado a outro pais, o formato da data irá se adequar com o mesmo. </small>
+                <small style="display: block; margin-top: 4px; font-size: 80%;">(Ex: Inglês - MM/dd/yyyy) </small>
+                <small style="display: block; margin-top: 4px; font-size: 80%;">(Ex: Português - dd/MM/yyyy) </small>
                 <br><br>
                 <div class="inputBox">
                     <label for="hora"><strong>Hora de Execução (HH:mm):</strong></label>
                     <select name="hora" id="hora" required>
                         <option value="">Selecione a hora</option>
                     </select>
+                    <small style="display: block; margin-top: 4px; font-size: 80%;">Formato - 24h</small>
                 </div>
                  <div>
                     <script>
@@ -136,6 +118,7 @@
                     <label for="anexo"><strong>Selecione um arquivo:</strong></label>
                     <input type="file" name="anexo" id="anexo" accept=".pdf,.csv,.xlsx" required>
                     <input type="hidden" name="MAX_FILE_SIZE" value="10000000"> <!-- 10MB em bytes -->
+                    <small style="display: block; margin-top: 4px; font-size: 80%;">Arquivos permitidos: .pdf, .csv, .xlsx</small>
                 </div>
                 <br><br>
                 <!--<div class="inputBox">
